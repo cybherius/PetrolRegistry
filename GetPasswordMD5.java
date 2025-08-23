@@ -19,7 +19,6 @@ public class GetPasswordMD5 {
             md5Chars[i] = (char)(obfuscatedMD5[i] ^ 0x10);
         }
         String md5Hash = new String(md5Chars);
-        System.out.println("Deobfuscated MD5: " + md5Hash);
         String password = "BakuBlackGold2025!";
         String message = "The password is " + password;
         String base64Message = Base64.getEncoder().encodeToString(message.getBytes());
