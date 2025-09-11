@@ -7,7 +7,7 @@ import string
 
 class PasswordObfuscator:
     def __init__(self):
-        self.seed_value = 0xB4C0  # Valid hexadecimal value
+        self.seed_value = 0xB4C0  
         self.obfuscation_map = self._generate_obfuscation_map()
         
     def _generate_obfuscation_map(self):
@@ -24,48 +24,39 @@ class PasswordObfuscator:
         return ''.join(transformation_func(c) for c in data)
     
     def _encode_layer_1(self, text):
-        # First layer of encoding - Base64
         return base64.b64encode(text.encode()).decode()
     
     def _encode_layer_2(self, text):
-        # Second layer - Character substitution
         return self._transform_data(text, lambda c: self.obfuscation_map.get(c, c))
     
     def _encode_layer_3(self, text):
-        # Third layer - Hex representation
         return ''.join(f'{ord(c):02x}' for c in text)
     
     def _encode_layer_4(self, text):
-        # Fourth layer - Compression
         compressed = zlib.compress(text.encode())
         return base64.b64encode(compressed).decode()
     
     def _decode_layer_4(self, text):
-        # Reverse layer 4
         decoded = base64.b64decode(text.encode())
         return zlib.decompress(decoded).decode()
     
     def _decode_layer_3(self, text):
-        # Reverse layer 3
         return ''.join(chr(int(text[i:i+2], 16)) for i in range(0, len(text), 2))
     
     def _decode_layer_2(self, text):
-        # Reverse layer 2
         reverse_map = self._reverse_map(self.obfuscation_map)
         return self._transform_data(text, lambda c: reverse_map.get(c, c))
     
     def _decode_layer_1(self, text):
-        # Reverse layer 1
         return base64.b64decode(text.encode()).decode()
     
     def obfuscate_password(self):
-        # The actual password components
         components = [
-            [66, 97, 107, 117],  # Baku
-            [66, 108, 97, 99, 107],  # Black
-            [71, 111, 108, 100],  # Gold
-            [50, 48, 50, 53],  # 2025
-            [33]  # !
+            [66, 97, 107, 117],  
+            [66, 108, 97, 99, 107],  
+            [71, 111, 108, 100],  
+            [50, 48, 50, 53],  
+            [33]  
         ]
         
         # Convert ASCII values to characters
