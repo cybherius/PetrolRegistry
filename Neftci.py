@@ -59,10 +59,10 @@ class PasswordObfuscator:
             [33]  
         ]
         
-        # Convert ASCII values to characters
+        
         password = ''.join(''.join(chr(c) for c in component) for component in components)
         
-        # Apply multiple layers of encoding
+        
         layer1 = self._encode_layer_1(password)
         layer2 = self._encode_layer_2(layer1)
         layer3 = self._encode_layer_3(layer2)
@@ -71,7 +71,6 @@ class PasswordObfuscator:
         return final_encoded
     
     def reveal_password(self, encoded_data):
-        # Reverse the encoding process
         layer4_decoded = self._decode_layer_4(encoded_data)
         layer3_decoded = self._decode_layer_3(layer4_decoded)
         layer2_decoded = self._decode_layer_2(layer3_decoded)
@@ -96,33 +95,26 @@ def generate_fake_data():
     return fake_hashes, fake_arrays
 
 def perform_decoy_operations():
-    """Perform operations that look important but are actually decoys"""
-    # Create a large list of random numbers
     numbers = [random.randint(1000, 9999) for _ in range(100)]
     
-    # Perform various operations that look complex
     transformed = list(map(lambda x: x * 2 - 7, numbers))
     filtered = list(filter(lambda x: x % 3 == 0, transformed))
     sorted_list = sorted(filtered, reverse=True)
     
-    # More decoy operations
+    
     matrix = [[i * j for j in range(5)] for i in range(5)]
     flattened = list(itertools.chain.from_iterable(matrix))
     
     return sorted_list, flattened
 
 def main():
-    # Generate fake data and perform decoy operations
+    
     fake_hashes, fake_arrays = generate_fake_data()
     sorted_list, flattened = perform_decoy_operations()
-    
-    # Create the password obfuscator
     obfuscator = PasswordObfuscator()
     
-    # Obfuscate the password
     encoded_password = obfuscator.obfuscate_password()
     
-    # Finally, reveal and display the password
     password = obfuscator.reveal_password(encoded_password)
     print("Decoded Password:", password)
 
